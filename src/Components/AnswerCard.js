@@ -6,7 +6,7 @@ class AnswerCard extends React.Component {
   }
 
   showModal = () => {
-    this.props.appShowModal(this.props.clue)
+    this.props.appShowModal(this.props.clue, this.props.categoryName)
   }
 
   render() {

@@ -17,7 +17,9 @@ class GameBoard extends React.Component {
           fetch(`http://www.jservice.io/api/category?id=${category.id}`)
             .then(resp => resp.json())
             .then(category => {
-              if (this.state.categories.length < 6 && category.clues.find(clue => { return clue.value === 600}) && category.clues.find(clue => { return clue.value === 800})) {
+              if (this.state.categories.length < 6 && 
+                category.clues.find(clue => { return clue.value === 600}) && 
+                category.clues.find(clue => { return clue.value === 800})) {
                 this.setState(prev => ({
                   categories: [...prev.categories, category]
                 }))
@@ -29,7 +31,16 @@ class GameBoard extends React.Component {
 
   mapRows = () => {
     const levels = [200, 400, 600, 800, 1000];
-    return levels.map(level => { return <CardRow appShowModal={this.props.appShowModal} key={level} clues={this.mapCluesByLevel(level)} /> })
+    return levels.map(level => { 
+      return <CardRow 
+        appShowModal={this.props.appShowModal} 
+        key={level} 
+        categoryNames={this.getCategoryNames()}
+        clues={this.mapCluesByLevel(level)} /> })
+  }
+
+  getCategoryNames = () => {
+    return this.state.categories.map(category => { return category.title })
   }
 
   mapCluesByLevel = level => {

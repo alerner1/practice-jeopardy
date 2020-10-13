@@ -7,12 +7,14 @@ class App extends React.Component {
   state = {
     show: false,
     clue: {},
+    categoryName: ''
   }
 
-  showModal = clue => {
+  showModal = (clue, categoryName) => {
     this.setState(prev => ({
       show: !prev.show,
-      clue: clue
+      clue: clue,
+      categoryName: categoryName
     }));
   };
 
@@ -20,7 +22,7 @@ class App extends React.Component {
     return (
       <div  className="App">
         <GameBoard appShowModal={this.showModal} />
-        <CardModal onClose={this.showModal} show={this.state.show} clue={this.state.clue} />
+        <CardModal categoryName={this.state.categoryName} onClose={this.showModal} show={this.state.show} clue={this.state.clue} />
       </div>
     );
   }

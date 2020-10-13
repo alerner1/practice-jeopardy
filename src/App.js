@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import GameBoard from './Containers/GameBoard';
+import CardModal from './Components/CardModal';
+import './index.scss'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    show: false,
+    clue: {},
+  }
+
+  showModal = clue => {
+    this.setState(prev => ({
+      show: !prev.show,
+      clue: clue
+    }));
+  };
+
+  render() {
+    return (
+      <div  className="App">
+        <GameBoard appShowModal={this.showModal} />
+        <CardModal onClose={this.showModal} show={this.state.show} clue={this.state.clue} />
+      </div>
+    );
+  }
 }
 
 export default App;
